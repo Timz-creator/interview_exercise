@@ -7,6 +7,24 @@ import {
 } from '@nestjs/graphql';
 import { ObjectID } from 'mongodb';
 
+export enum TagType {  //defined tag enum 
+  subTopic = 'subTopic',
+
+}
+
+registerEnumType(TagType, {
+  name: 'TagType',
+});
+
+@InputType()
+export class TagDto { //defined Tag Data transfer object
+  @Field()
+  id: string;
+
+  @Field(() => TagType)
+  type: TagType;
+}
+
 export enum GifType {
   Gif = 'gif',
   Sticker = 'sticker',

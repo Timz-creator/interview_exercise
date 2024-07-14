@@ -1,8 +1,19 @@
 import { Document } from 'mongoose';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { ObjectID } from 'mongodb';
-import { AttachmentType, GifType } from './message.dto';
+import { AttachmentType, GifType, TagType } from './message.dto';
 import { Field, ObjectType } from '@nestjs/graphql';
+
+@Schema()
+export class Tag {
+  @Prop()
+  id: string;
+
+  @Prop({
+    type: TagType,
+  })
+  type: TagType;
+}
 
 @Schema()
 export class ReplyMessage {
@@ -153,6 +164,12 @@ export class ChatMessageModel {
     nullable: true,
   })
   reactions?: Reaction[];
+
+  @Prop({
+    type: [{ reaction: String, userIds: [String], reactionUnicode: String }],
+    nullable: true,
+  })
+  tags?: Tag[];
 
   /**
    * All the properties below are virtual properties

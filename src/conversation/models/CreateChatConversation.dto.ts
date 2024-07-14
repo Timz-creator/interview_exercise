@@ -7,7 +7,7 @@ export enum TagType {
 }
 
 export class Tag {
-  @ApiProperty({ type: String })
+  @ApiProperty({ type: String }) //APIProperty is to provide metadata for Swagger docs (Swagger - API documentation tool)
   id: string;
 
   @ApiProperty({ enum: TagType })
